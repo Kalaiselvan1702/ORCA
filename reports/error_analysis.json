@@ -1,0 +1,116 @@
+{
+  "total_evaluated_windows": 288,
+  "false_positive_count": 4,
+  "false_negative_count": 6,
+  "root_cause_misclassifications": 3,
+  "false_positive_rate": 0.027777777777777776,
+  "false_negative_rate": 0.041666666666666664,
+  "sample_false_positives": [
+    {
+      "case": "re2ob_currencyservice_cpu_1",
+      "timestamp": 1705682337,
+      "anomaly_prob": 0.8911618590354919,
+      "predicted_root_cause": "adservice",
+      "note": "Normal baseline fluctuation flagged as anomaly"
+    },
+    {
+      "case": "re2ob_currencyservice_cpu_1",
+      "timestamp": 1705682352,
+      "anomaly_prob": 0.9074525833129883,
+      "predicted_root_cause": "adservice",
+      "note": "Normal baseline fluctuation flagged as anomaly"
+    },
+    {
+      "case": "re2ob_productcatalogservice_cpu_1",
+      "timestamp": 1705339822,
+      "anomaly_prob": 0.8467676043510437,
+      "predicted_root_cause": "frontend",
+      "note": "Normal baseline fluctuation flagged as anomaly"
+    },
+    {
+      "case": "re2ob_productcatalogservice_cpu_1",
+      "timestamp": 1705339957,
+      "anomaly_prob": 0.9053494930267334,
+      "predicted_root_cause": "frontend",
+      "note": "Normal baseline fluctuation flagged as anomaly"
+    }
+  ],
+  "sample_false_negatives": [
+    {
+      "case": "re2ob_checkoutservice_delay_1",
+      "timestamp": 1705666511,
+      "anomaly_prob": 0.03024885058403015,
+      "actual_root_cause": "checkoutservice",
+      "note": "Early-stage or localized fault signal below 0.5 threshold"
+    },
+    {
+      "case": "re2ob_checkoutservice_delay_1",
+      "timestamp": 1705666526,
+      "anomaly_prob": 0.03347320109605789,
+      "actual_root_cause": "checkoutservice",
+      "note": "Early-stage or localized fault signal below 0.5 threshold"
+    },
+    {
+      "case": "re2ob_currencyservice_cpu_1",
+      "timestamp": 1705682817,
+      "anomaly_prob": 0.030472656711935997,
+      "actual_root_cause": "currencyservice",
+      "note": "Early-stage or localized fault signal below 0.5 threshold"
+    },
+    {
+      "case": "re2ob_productcatalogservice_cpu_1",
+      "timestamp": 1705340542,
+      "anomaly_prob": 0.031048964709043503,
+      "actual_root_cause": "productcatalogservice",
+      "note": "Early-stage or localized fault signal below 0.5 threshold"
+    },
+    {
+      "case": "re2ob_productcatalogservice_cpu_1",
+      "timestamp": 1705340557,
+      "anomaly_prob": 0.030834266915917397,
+      "actual_root_cause": "productcatalogservice",
+      "note": "Early-stage or localized fault signal below 0.5 threshold"
+    }
+  ],
+  "sample_root_cause_errors": [
+    {
+      "case": "re2ob_currencyservice_cpu_1",
+      "timestamp": 1705682817,
+      "actual_service": "currencyservice",
+      "predicted_service": "paymentservice",
+      "top3_candidates": [
+        "paymentservice",
+        "checkoutservice",
+        "frontend"
+      ],
+      "actual_service_rank": 4,
+      "confidence": 0.21499209105968475
+    },
+    {
+      "case": "re2ob_productcatalogservice_cpu_1",
+      "timestamp": 1705340542,
+      "actual_service": "productcatalogservice",
+      "predicted_service": "frontend",
+      "top3_candidates": [
+        "frontend",
+        "productcatalogservice",
+        "checkoutservice"
+      ],
+      "actual_service_rank": 2,
+      "confidence": 0.5568617582321167
+    },
+    {
+      "case": "re2ob_productcatalogservice_cpu_1",
+      "timestamp": 1705340557,
+      "actual_service": "productcatalogservice",
+      "predicted_service": "frontend",
+      "top3_candidates": [
+        "frontend",
+        "productcatalogservice",
+        "recommendationservice"
+      ],
+      "actual_service_rank": 2,
+      "confidence": 0.4309517741203308
+    }
+  ]
+}

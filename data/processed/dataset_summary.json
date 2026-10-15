@@ -1,0 +1,51 @@
+{
+  "train": {
+    "total": 733,
+    "normal": 384,
+    "anomaly": 349
+  },
+  "val": {
+    "total": 288,
+    "normal": 144,
+    "anomaly": 144
+  },
+  "test": {
+    "total": 288,
+    "normal": 144,
+    "anomaly": 144
+  },
+  "train_cases": [
+    "re2ob_checkoutservice_cpu_1",
+    "re2ob_checkoutservice_cpu_2",
+    "re2ob_checkoutservice_delay_2",
+    "re2ob_checkoutservice_delay_3",
+    "re2ob_currencyservice_cpu_2",
+    "re2ob_emailservice_cpu_2",
+    "re2ob_productcatalogservice_cpu_2",
+    "re2ob_recommendationservice_cpu_2"
+  ],
+  "val_cases": [
+    "re2ob_checkoutservice_cpu_3",
+    "re2ob_emailservice_cpu_1",
+    "re2ob_recommendationservice_cpu_1"
+  ],
+  "test_cases": [
+    "re2ob_checkoutservice_delay_1",
+    "re2ob_currencyservice_cpu_1",
+    "re2ob_productcatalogservice_cpu_1"
+  ],
+  "window_size_sec": 15,
+  "slide_step_sec": 15,
+  "metric_features_dim": 70,
+  "metric_flat_stats_dim": 280,
+  "log_tokens_len": 64,
+  "log_stats_dim": 20,
+  "graph_nodes_dim": [
+    10,
+    27
+  ],
+  "graph_adj_dim": [
+    10,
+    10
+  ]
+}

@@ -1,0 +1,57 @@
+# Experiment suite definition for ablation and comparative benchmarking
+experiments:
+  exp1_baseline_isoforest:
+    name: "Baseline_IsolationForest"
+    type: "classical"
+    model: "IsolationForest"
+    modalities: ["metrics"]
+    
+  exp2_baseline_xgboost:
+    name: "Baseline_XGBoost"
+    type: "classical"
+    model: "XGBoost"
+    modalities: ["metrics"]
+
+  exp3_log_only:
+    name: "Deep_LogOnly"
+    type: "deep"
+    modalities: ["logs"]
+    model: "LogTransformer"
+
+  exp4_metric_only:
+    name: "Deep_MetricOnly"
+    type: "deep"
+    modalities: ["metrics"]
+    model: "MetricTCN"
+
+  exp5_trace_only:
+    name: "Deep_TraceGraphOnly"
+    type: "deep"
+    modalities: ["traces"]
+    model: "TraceGNN"
+
+  exp6_logs_metrics:
+    name: "Bimodal_Logs_Metrics"
+    type: "deep"
+    modalities: ["logs", "metrics"]
+    fusion: "cross_attention"
+
+  exp7_metrics_traces:
+    name: "Bimodal_Metrics_Traces"
+    type: "deep"
+    modalities: ["metrics", "traces"]
+    fusion: "cross_attention"
+
+  exp8_orca_multimodal:
+    name: "ORCA_Full_Multimodal"
+    type: "deep"
+    modalities: ["logs", "metrics", "traces"]
+    fusion: "cross_attention"
+
+ablations:
+  - "no_logs"
+  - "no_metrics"
+  - "no_traces"
+  - "concat_fusion"
+  - "gated_fusion"
+  - "cross_attention_fusion"

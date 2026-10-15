@@ -1,0 +1,88 @@
+# Dev configuration for rapid prototyping and validation
+project:
+  name: "ORCA"
+  version: "1.0.0"
+  seed: 42
+  device: "cpu" # CPU fallback to avoid Python 3.13 Windows CUDA access violations
+
+data:
+  raw_dir: "data/raw"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  dataset_name: "RE2-OB"
+  max_cases: 10            # 2 cases per root cause service (10 cases total)
+  window_size_sec: 15      # 15s aggregation windows
+  slide_step_sec: 15
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+
+services:
+  - "adservice"
+  - "cartservice"
+  - "checkoutservice"
+  - "currencyservice"
+  - "emailservice"
+  - "frontend"
+  - "paymentservice"
+  - "productcatalogservice"
+  - "recommendationservice"
+  - "shippingservice"
+
+model:
+  log:
+    vocab_size: 500
+    embed_dim: 32
+    hidden_dim: 64
+    num_layers: 1
+    dropout: 0.1
+  metric:
+    in_features: 70
+    hidden_dim: 64
+    num_layers: 2
+    dropout: 0.1
+  graph:
+    num_nodes: 10
+    node_feat_dim: 27
+    hidden_dim: 32
+    num_layers: 2
+    heads: 2
+    dropout: 0.1
+  fusion:
+    fusion_type: "cross_attention" # Options: cross_attention, gated, concat
+    fusion_dim: 64
+    dropout: 0.1
+  heads:
+    num_classes_anomaly: 2
+    num_services: 10
+    anomaly_loss_weight: 1.0
+    root_cause_loss_weight: 1.0
+
+training:
+  batch_size: 32
+  epochs: 10
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  early_stopping_patience: 5
+  save_dir: "artifacts/models"
+  checkpoint_name: "orca_dev_checkpoint.pt"
+
+evaluation:
+  metrics:
+    - "f1_score"
+    - "precision"
+    - "recall"
+    - "roc_auc"
+    - "top1_accuracy"
+    - "top3_accuracy"
+    - "mrr"
+
+tracking:
+  mlflow:
+    enabled: false
+    experiment_name: "ORCA_Dev"
+    tracking_uri: "sqlite:///artifacts/mlflow.db"
+
+optuna:
+  n_trials: 3
+  study_name: "orca_dev_optuna"

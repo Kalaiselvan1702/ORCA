@@ -1,0 +1,36 @@
+# Model architecture definitions
+model_types:
+  log_encoder:
+    type: "transformer"
+    vocab_size: 1000
+    embed_dim: 64
+    hidden_dim: 128
+    num_heads: 4
+    num_layers: 2
+    dropout: 0.1
+  
+  metric_encoder:
+    type: "tcn_gru"
+    in_features: 72
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.1
+    kernel_size: 3
+
+  graph_encoder:
+    type: "gat_v2"
+    num_nodes: 10
+    node_feat_dim: 32
+    hidden_dim: 64
+    num_layers: 2
+    heads: 4
+    dropout: 0.1
+
+  fusion:
+    type: "cross_attention" # "gated", "cross_attention", "concat"
+    fusion_dim: 128
+    dropout: 0.1
+
+  heads:
+    anomaly_classes: 2
+    num_services: 10

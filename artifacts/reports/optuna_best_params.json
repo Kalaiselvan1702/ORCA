@@ -1,0 +1,11 @@
+{
+  "best_trial": 2,
+  "best_val_loss": 2.7401633659998574,
+  "best_params": {
+    "learning_rate": 0.0006553895063119176,
+    "fusion_type": "cross_attention",
+    "hidden_dim": 32,
+    "dropout": 0.21290421932428755,
+    "root_cause_loss_weight": 1.1640178052992942
+  }
+}

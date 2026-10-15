@@ -1,0 +1,22 @@
+{
+  "temperature": 0.8057263001839694,
+  "is_fitted": true,
+  "metadata": {
+    "method": "temperature_scaling",
+    "temperature": 0.8057263001839694,
+    "raw_val_metrics": {
+      "ece": 0.2172495819945656,
+      "mce": 0.7005254720148438,
+      "nll": 0.6052348137346666,
+      "brier": 0.33074680918871496,
+      "num_samples": 144
+    },
+    "calibrated_val_metrics": {
+      "ece": 0.14665083587169644,
+      "mce": 0.5224182376494775,
+      "nll": 0.5814537580069222,
+      "brier": 0.3360607650211793,
+      "num_samples": 144
+    }
+  }
+}

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  orca-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kalaiselvan1702/orca:latest
+    container_name: orca-api-server
+    ports:
+      - "8000:8000"
+    environment:
+      - ORCA_CHECKPOINT=artifacts/models/orca_dev_checkpoint.pt
+      - KMP_DUPLICATE_LIB_OK=TRUE
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  orca-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kalaiselvan1702/orca:latest
+    container_name: orca-streamlit-dashboard
+    command: ["streamlit", "run", "frontend/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    ports:
+      - "8501:8501"
+    environment:
+      - ORCA_API_URL=http://orca-api:8000
+    depends_on:
+      - orca-api
+    restart: unless-stopped

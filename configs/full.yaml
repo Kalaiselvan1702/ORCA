@@ -1,0 +1,90 @@
+# Full production/benchmarking configuration
+project:
+  name: "ORCA"
+  version: "1.0.0"
+  seed: 42
+  device: "cuda"
+
+data:
+  raw_dir: "data/raw"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  dataset_name: "RE2-OB"
+  max_cases: 30            # Comprehensive case subset
+  window_size_sec: 10
+  slide_step_sec: 10
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+
+services:
+  - "adservice"
+  - "cartservice"
+  - "checkoutservice"
+  - "currencyservice"
+  - "emailservice"
+  - "frontend"
+  - "paymentservice"
+  - "productcatalogservice"
+  - "recommendationservice"
+  - "shippingservice"
+
+model:
+  log:
+    vocab_size: 2000
+    embed_dim: 64
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.2
+  metric:
+    in_features: 72
+    hidden_dim: 128
+    num_layers: 3
+    dropout: 0.2
+  graph:
+    num_nodes: 10
+    node_feat_dim: 32
+    hidden_dim: 64
+    num_layers: 2
+    heads: 4
+    dropout: 0.2
+  fusion:
+    fusion_type: "cross_attention"
+    fusion_dim: 128
+    dropout: 0.2
+  heads:
+    num_classes_anomaly: 2
+    num_services: 10
+    anomaly_loss_weight: 1.0
+    root_cause_loss_weight: 1.2
+
+training:
+  batch_size: 32
+  epochs: 20
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  early_stopping_patience: 5
+  save_dir: "artifacts/models"
+  checkpoint_name: "orca_full_checkpoint.pt"
+
+evaluation:
+  metrics:
+    - "f1_score"
+    - "precision"
+    - "recall"
+    - "roc_auc"
+    - "pr_auc"
+    - "top1_accuracy"
+    - "top3_accuracy"
+    - "top5_accuracy"
+    - "mrr"
+
+tracking:
+  mlflow:
+    enabled: true
+    experiment_name: "ORCA_Full"
+    tracking_uri: "sqlite:///artifacts/mlflow.db"
+
+optuna:
+  n_trials: 15
+  study_name: "orca_full_optuna"
